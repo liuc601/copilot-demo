@@ -1,0 +1,8 @@
+:root{--bg:#f7f7fb;--card:#fff;--accent:#0b5fff}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+.app{min-height:100vh;background:var(--bg);display:flex;flex-direction:column}
+.hero{background:linear-gradient(90deg,#0b5fff22,#12c2e922);padding:48px 24px;text-align:center}
+.hero h1{margin:0 0 8px;font-size:28px}
+.cards{display:flex;gap:16px;padding:24px;justify-content:center}
+.card{background:var(--card);padding:20px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.foot{margin-top:auto;padding:12px;text-align:center;color:#666}
