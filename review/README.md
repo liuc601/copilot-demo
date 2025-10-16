@@ -7,11 +7,13 @@
 GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
 
 1. **GitHub Copilot Enterprise 功能**
+
    - 这是 GitHub Copilot Enterprise 计划的一部分
    - 需要组织管理员启用此功能
    - 个人账户可能无法使用
 
 2. **需要在仓库中配置**
+
    - 需要在仓库设置中启用 Copilot
    - 可能需要特定的权限级别
 
@@ -27,9 +29,11 @@ GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
 我们创建了一个完整的代码审查流程，包括：
 
 ### 1. 详细的审查报告
+
 📄 **文件**: `review/report.md`
 
 包含内容：
+
 - ✅ 21 个问题的详细分析
 - ✅ 问题分类（严重/中等/轻微）
 - ✅ 具体的修复建议和代码示例
@@ -37,9 +41,11 @@ GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
 - ✅ 执行摘要
 
 ### 2. 修复后的代码
+
 📄 **文件**: `sort.fixed.ts`
 
 修复内容：
+
 - ✅ 所有类型安全问题
 - ✅ 算法错误修正
 - ✅ 添加完整的 JSDoc 文档
@@ -49,14 +55,14 @@ GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
 
 ### 3. 对比分析
 
-| 项目 | 原始代码 (sort.ts) | 修复代码 (sort.fixed.ts) |
-|------|-------------------|-------------------------|
-| 类型安全 | ❌ 使用 `any` | ✅ 使用泛型约束 |
-| 算法正确性 | ❌ 循环条件错误 | ✅ 正确实现 |
-| 输入验证 | ❌ 无 | ✅ 完整验证 |
-| 文档 | ❌ 缺失 | ✅ 完整 JSDoc |
-| 性能 | ❌ 未优化 | ✅ 优化实现 |
-| 可维护性 | ❌ 低 | ✅ 高 |
+| 项目       | 原始代码 (sort.ts) | 修复代码 (sort.fixed.ts) |
+| ---------- | ------------------ | ------------------------ |
+| 类型安全   | ❌ 使用 `any`      | ✅ 使用泛型约束          |
+| 算法正确性 | ❌ 循环条件错误    | ✅ 正确实现              |
+| 输入验证   | ❌ 无              | ✅ 完整验证              |
+| 文档       | ❌ 缺失            | ✅ 完整 JSDoc            |
+| 性能       | ❌ 未优化          | ✅ 优化实现              |
+| 可维护性   | ❌ 低              | ✅ 高                    |
 
 ---
 
@@ -68,6 +74,7 @@ GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
 2. 选中全部代码（Cmd/Ctrl + A）
 3. 打开 Copilot Chat（Cmd/Ctrl + I）
 4. 输入提示词：
+
    ```
    请审查这段代码，找出所有潜在问题，包括：
    - 类型安全问题
@@ -75,13 +82,14 @@ GitHub Copilot 的 Pull Request 审查功能目前有以下几种情况：
    - 性能问题
    - 代码风格问题
    - 可维护性问题
-   
+
    请提供具体的修复建议和代码示例。
    ```
 
 ### 方法 2: 使用代码注释触发审查
 
 在代码中添加注释：
+
 ```typescript
 // @copilot review this function for potential issues
 function bubbleSort(arr: any[]): any[] {
@@ -110,16 +118,19 @@ gh copilot suggest "review the changes in sort.ts"
 如果你有 GitHub Copilot Enterprise 访问权限：
 
 ### 1. 组织级别设置
+
 1. 访问组织设置: `https://github.com/organizations/YOUR_ORG/settings/copilot`
 2. 启用 "Pull request summaries"
 3. 启用 "Code review"
 
 ### 2. 仓库级别设置
+
 1. 访问仓库设置: Settings → Code security and analysis
 2. 找到 "GitHub Copilot" 部分
 3. 启用相关功能
 
 ### 3. 创建 PR 时
+
 1. 创建 Pull Request
 2. 在 Reviewers 部分应该会看到 "Copilot" 选项
 3. 点击 "Request review from Copilot"
@@ -127,6 +138,7 @@ gh copilot suggest "review the changes in sort.ts"
 ### 4. 或使用 GitHub Actions
 
 创建 `.github/workflows/copilot-review.yml`:
+
 ```yaml
 name: Copilot Code Review
 
@@ -139,7 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Copilot Review
         uses: github/copilot-review-action@v1
         with:
@@ -171,6 +183,7 @@ jobs:
 ## 下一步
 
 ### 选项 1: 应用修复
+
 ```bash
 # 将修复后的代码替换原文件
 cp sort.fixed.ts sort.ts
@@ -180,12 +193,14 @@ git push
 ```
 
 ### 选项 2: 创建 PR（推荐）
+
 1. 在 GitHub 上创建 PR: `feature/testbranch` → `main`
 2. 在 PR 描述中引用审查报告
 3. 邀请团队成员进行人工审查
 4. 逐步应用修复建议
 
 ### 选项 3: 继续下一个 Lab
+
 Lab 已完成主要目标（代码审查流程演示）。
 
 ---
@@ -193,11 +208,13 @@ Lab 已完成主要目标（代码审查流程演示）。
 ## 学习要点
 
 1. **自动化代码审查的价值**
+
    - 快速发现常见问题
    - 一致的审查标准
    - 节省人工审查时间
 
 2. **Review Agent 的局限性**
+
    - 无法理解业务逻辑
    - 可能遗漏上下文相关问题
    - 仍需人工最终审查
